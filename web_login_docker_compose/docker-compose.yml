@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  web-login-mysql:
+    container_name: web-login-mysql
+    image: mysql
+    env_file: .env
+    ports:
+      - "3306:3306"
+    volumes: 
+      - ./mysql:/var/lib/mysql
+    networks: 
+      - web-login-net
+
+networks: 
+    web-login-net:
