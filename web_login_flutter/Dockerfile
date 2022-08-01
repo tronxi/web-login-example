@@ -4,7 +4,7 @@ RUN flutter doctor
 RUN flutter config --enable-web
 COPY . /front
 RUN flutter pub get
-RUN flutter build web
+RUN flutter build web --base-href "/web-login-example/"
 
 FROM nginx:1.17.6-alpine
 RUN rm -r /usr/share/nginx/html/
