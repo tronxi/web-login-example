@@ -1,7 +1,6 @@
 package com.example.weblogincore.domain.usecases;
 
 import com.example.weblogincore.domain.exceptions.PasswordNotMatchesException;
-import com.example.weblogincore.domain.exceptions.UserNotFoundException;
 import com.example.weblogincore.domain.model.UpdatePrivateProfileOrder;
 import com.example.weblogincore.domain.model.User;
 import com.example.weblogincore.domain.persistence.UserRepository;
