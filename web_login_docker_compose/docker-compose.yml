@@ -11,5 +11,23 @@ services:
     networks: 
       - web-login-net
 
+  web-login-flutter:
+    container_name: web-login-flutter
+    image: tronxi/web-login-flutter:latest
+    env_file: .env
+    ports:
+      - "80:80"
+    networks: 
+      - web-login-net
+
+  web-login-core:
+    container_name: web-login-core
+    image: tronxi/web-login-core:latest
+    ports:
+      - "8080:8080"
+    env_file: .env
+    networks: 
+      - web-login-net
+
 networks: 
     web-login-net:
