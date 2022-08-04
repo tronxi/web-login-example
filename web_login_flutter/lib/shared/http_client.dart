@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HttpClient {
   static String? token;
   late final Dio _dio;
-  static const baseUrl = "https://tronxi.ddns.net/web-login/";
-  //static const baseUrl = "http://localhost:8080/";
+  static String baseUrl = dotenv.env['URL'] ?? "http://localhost:8080/";
+
   HttpClient._() {
     _dio = Dio();
     _dio.interceptors.add(InterceptorsWrapper(

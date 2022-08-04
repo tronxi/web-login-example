@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:web_login_flutter/pages/login/login_page.dart';
 import 'package:web_login_flutter/routes.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: "environments/.env");
+
   runApp(const MyApp());
 }
 
