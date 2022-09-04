@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:web_login_flutter/bloc/form_bloc.dart' as form_bloc;
+import 'package:web_login_flutter/widgets/flow_form/flow_form.dart';
 import 'package:web_login_flutter/widgets/lateral_drawer.dart';
 import 'package:web_login_flutter/widgets/logout_app_bar.dart';
 
@@ -13,7 +16,11 @@ class HomePage extends StatelessWidget {
             context: context,
             title: "Home"
         ).build(),
-        body: const HomePageContent()
+        // body: const HomePageContent()
+        body: BlocProvider(
+          create: (BuildContext context) => form_bloc.FormBloc(),
+          child: const HomePageContent(),
+        ),
     );
   }
 }
@@ -23,27 +30,17 @@ class HomePageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Contenido de la home'),
-            subtitle: Text(
-              'texto',
-              style: TextStyle(color: Colors.black.withOpacity(0.6)),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Home de prueba sin ninguna funcionalidad',
-              style: TextStyle(color: Colors.black.withOpacity(0.6)),
-            ),
-          ),
-        ],
-      ),
+    return BlocBuilder<form_bloc.FormBloc, form_bloc.FormState>(
+        builder: (context, state) {
+          if (state is form_bloc.FormInitial) {
+            context.read<form_bloc.FormBloc>().add(form_bloc.FormRetrieve());
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is form_bloc.FormRetrieved) {
+            return FlowForm(form: state.form);
+          } else {
+            return const Text("error");
+          }
+        }
     );
   }
 }
