@@ -1,16 +1,16 @@
 package com.example.weblogincore.infrastructure.api.rest.controller;
 
-import com.example.weblogincore.domain.model.RegisterUserOrder;
-import com.example.weblogincore.domain.model.User;
+import com.example.weblogincore.domain.model.user.RegisterUserOrder;
+import com.example.weblogincore.domain.model.user.User;
 import com.example.weblogincore.domain.services.UserRetriever;
 import com.example.weblogincore.domain.usecases.RegisterUseCase;
 import com.example.weblogincore.domain.usecases.UpdatePrivateProfileUseCase;
 import com.example.weblogincore.domain.usecases.UpdatePublicProfileUseCase;
 import com.example.weblogincore.infrastructure.api.rest.mapper.UserMapper;
-import com.example.weblogincore.infrastructure.api.rest.model.RegisterRequest;
-import com.example.weblogincore.infrastructure.api.rest.model.UpdatePrivateProfileRequest;
-import com.example.weblogincore.infrastructure.api.rest.model.UpdatePublicProfileRequest;
-import com.example.weblogincore.infrastructure.api.rest.model.UserResponse;
+import com.example.weblogincore.infrastructure.api.rest.model.user.RegisterRequest;
+import com.example.weblogincore.infrastructure.api.rest.model.user.UpdatePrivateProfileRequest;
+import com.example.weblogincore.infrastructure.api.rest.model.user.UpdatePublicProfileRequest;
+import com.example.weblogincore.infrastructure.api.rest.model.user.UserResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

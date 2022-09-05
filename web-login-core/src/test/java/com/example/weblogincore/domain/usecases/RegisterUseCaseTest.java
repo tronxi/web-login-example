@@ -1,6 +1,6 @@
 package com.example.weblogincore.domain.usecases;
 
-import com.example.weblogincore.domain.model.RegisterUserOrder;
+import com.example.weblogincore.domain.model.user.RegisterUserOrder;
 import com.example.weblogincore.domain.persistence.UserRepository;
 import com.example.weblogincore.util.TestUtil;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)

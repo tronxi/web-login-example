@@ -1,13 +1,13 @@
 package com.example.weblogincore.infrastructure.api.rest.mapper;
 
-import com.example.weblogincore.domain.model.RegisterUserOrder;
-import com.example.weblogincore.domain.model.UpdatePrivateProfileOrder;
-import com.example.weblogincore.domain.model.UpdatePublicProfileOrder;
-import com.example.weblogincore.domain.model.User;
-import com.example.weblogincore.infrastructure.api.rest.model.RegisterRequest;
-import com.example.weblogincore.infrastructure.api.rest.model.UpdatePrivateProfileRequest;
-import com.example.weblogincore.infrastructure.api.rest.model.UpdatePublicProfileRequest;
-import com.example.weblogincore.infrastructure.api.rest.model.UserResponse;
+import com.example.weblogincore.domain.model.user.RegisterUserOrder;
+import com.example.weblogincore.domain.model.user.UpdatePrivateProfileOrder;
+import com.example.weblogincore.domain.model.user.UpdatePublicProfileOrder;
+import com.example.weblogincore.domain.model.user.User;
+import com.example.weblogincore.infrastructure.api.rest.model.user.RegisterRequest;
+import com.example.weblogincore.infrastructure.api.rest.model.user.UpdatePrivateProfileRequest;
+import com.example.weblogincore.infrastructure.api.rest.model.user.UpdatePublicProfileRequest;
+import com.example.weblogincore.infrastructure.api.rest.model.user.UserResponse;
 import org.springframework.stereotype.Component;
 
 @Component

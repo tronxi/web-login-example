@@ -1,9 +1,9 @@
 package com.example.weblogincore.util;
 
-import com.example.weblogincore.domain.model.RegisterUserOrder;
-import com.example.weblogincore.domain.model.UpdatePrivateProfileOrder;
-import com.example.weblogincore.domain.model.UpdatePublicProfileOrder;
-import com.example.weblogincore.domain.model.User;
+import com.example.weblogincore.domain.model.user.RegisterUserOrder;
+import com.example.weblogincore.domain.model.user.UpdatePrivateProfileOrder;
+import com.example.weblogincore.domain.model.user.UpdatePublicProfileOrder;
+import com.example.weblogincore.domain.model.user.User;
 
 public class TestUtil {
     public static Long ID = 5L;

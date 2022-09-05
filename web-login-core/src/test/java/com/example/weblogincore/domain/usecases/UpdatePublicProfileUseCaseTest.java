@@ -1,8 +1,7 @@
 package com.example.weblogincore.domain.usecases;
 
-import com.example.weblogincore.domain.model.UpdatePrivateProfileOrder;
-import com.example.weblogincore.domain.model.UpdatePublicProfileOrder;
-import com.example.weblogincore.domain.model.User;
+import com.example.weblogincore.domain.model.user.UpdatePublicProfileOrder;
+import com.example.weblogincore.domain.model.user.User;
 import com.example.weblogincore.domain.persistence.UserRepository;
 import com.example.weblogincore.domain.services.UserRetriever;
 import com.example.weblogincore.util.TestUtil;

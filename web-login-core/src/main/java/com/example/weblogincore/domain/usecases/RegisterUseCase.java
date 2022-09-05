@@ -1,7 +1,7 @@
 package com.example.weblogincore.domain.usecases;
 
-import com.example.weblogincore.domain.model.RegisterUserOrder;
-import com.example.weblogincore.domain.model.User;
+import com.example.weblogincore.domain.model.user.RegisterUserOrder;
+import com.example.weblogincore.domain.model.user.User;
 import com.example.weblogincore.domain.persistence.UserRepository;
 import org.springframework.stereotype.Service;
 

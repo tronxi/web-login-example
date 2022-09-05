@@ -1,7 +1,7 @@
 package com.example.weblogincore.domain.services;
 
 import com.example.weblogincore.domain.exceptions.UserNotFoundException;
-import com.example.weblogincore.domain.model.User;
+import com.example.weblogincore.domain.model.user.User;
 import com.example.weblogincore.domain.persistence.UserRepository;
 import org.springframework.stereotype.Service;
 

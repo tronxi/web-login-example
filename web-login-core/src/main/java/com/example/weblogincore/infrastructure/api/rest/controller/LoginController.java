@@ -2,7 +2,7 @@ package com.example.weblogincore.infrastructure.api.rest.controller;
 
 import com.example.weblogincore.configuration.security.service.JwtService;
 import com.example.weblogincore.domain.persistence.UserRepository;
-import com.example.weblogincore.infrastructure.api.rest.model.LoginResponse;
+import com.example.weblogincore.infrastructure.api.rest.model.user.LoginResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +23,7 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@AuthenticationPrincipal User activeUser) {
-        com.example.weblogincore.domain.model.User user = userRepository.findByEmail(activeUser.getUsername()).get();
+        com.example.weblogincore.domain.model.user.User user = userRepository.findByEmail(activeUser.getUsername()).get();
         String token = jwtService.createToken(user.getEmail(), user.getId().toString());
         return ResponseEntity.ok(new LoginResponse(token));
     }

@@ -1,7 +1,7 @@
 package com.example.weblogincore.infrastructure.persistence.adapter;
 
-import com.example.weblogincore.domain.model.RegisterUserOrder;
-import com.example.weblogincore.domain.model.User;
+import com.example.weblogincore.domain.model.user.RegisterUserOrder;
+import com.example.weblogincore.domain.model.user.User;
 import com.example.weblogincore.domain.persistence.UserRepository;
 import com.example.weblogincore.infrastructure.persistence.entities.UserEntity;
 import com.example.weblogincore.infrastructure.persistence.jpa.UserJPA;

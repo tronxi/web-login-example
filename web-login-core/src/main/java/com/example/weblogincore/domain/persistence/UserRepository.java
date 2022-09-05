@@ -1,7 +1,7 @@
 package com.example.weblogincore.domain.persistence;
 
-import com.example.weblogincore.domain.model.RegisterUserOrder;
-import com.example.weblogincore.domain.model.User;
+import com.example.weblogincore.domain.model.user.RegisterUserOrder;
+import com.example.weblogincore.domain.model.user.User;
 
 import java.util.Optional;
 

@@ -7,7 +7,7 @@ import 'package:web_login_flutter/models/form/multiple_question.dart';
 import 'package:web_login_flutter/models/form/question.dart';
 import 'package:web_login_flutter/models/form/section.dart';
 import 'package:web_login_flutter/models/form/text_question.dart';
-import 'package:web_login_flutter/widgets/buttons.dart';
+import 'package:web_login_flutter/shared/token_service.dart';
 import 'package:web_login_flutter/widgets/flow_form/bool_question_form.dart';
 import 'package:web_login_flutter/widgets/flow_form/multiple_question_form.dart';
 
@@ -34,6 +34,8 @@ class FlowFormContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FlowFormBloc, FlowFormState>(builder: (context, state) {
       if (state is FlowFormInitial) {
+        context.read<FlowFormBloc>().add(
+            CreateAttempt(userId: TokenService().retrieveUserId()!, formId: 0));
         return FlowFormBody(
             form: form,
             actualQuestion: form.sections.first.question,
@@ -45,6 +47,11 @@ class FlowFormContent extends StatelessWidget {
             actualQuestion: state.formState.actualQuestion,
             actualSection: state.formState.actualSection,
             responses: state.formState.responses);
+      } else if (state is WaitingForFinish) {
+        context
+            .read<FlowFormBloc>()
+            .add(FinishAttempt(attemptId: state.attemptId));
+        return const Center(child: CircularProgressIndicator());
       } else if (state is FlowFormFinished) {
         return const Center(
           child: Text("Formulario terminado"),
@@ -72,9 +79,8 @@ class FlowFormBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [Card(
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Card(
             child: Column(
           children: [
             SizedBox(
@@ -83,10 +89,12 @@ class FlowFormBody extends StatelessWidget {
                 title: Text(form.name),
                 subtitle:
                     form.description != null ? Text(form.description!) : null,
-                leading: responses != 0 ? IconButton(
-                  icon: const Icon(Icons.backspace),
-                  onPressed: () => _onPressedBackButton(context),
-                ) : null,
+                leading: responses != 0
+                    ? IconButton(
+                        icon: const Icon(Icons.backspace),
+                        onPressed: () => _onPressedBackButton(context),
+                      )
+                    : null,
               ),
             ),
             Card(
@@ -95,7 +103,8 @@ class FlowFormBody extends StatelessWidget {
                   SizedBox(
                     width: 475,
                     child: ListTile(
-                      title: Text("${actualSection.name} ${form.sectionPosition(actualSection) + 1}/${form.totalSections}"),
+                      title: Text(
+                          "${actualSection.name} ${form.sectionPosition(actualSection) + 1}/${form.totalSections}"),
                       subtitle: actualSection.description != null
                           ? Text(actualSection.description!)
                           : null,

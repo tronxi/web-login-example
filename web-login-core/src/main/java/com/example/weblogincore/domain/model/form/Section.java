@@ -1,5 +1,7 @@
 package com.example.weblogincore.domain.model.form;
 
+import com.example.weblogincore.domain.model.form.questions.Question;
+
 public class Section {
     private final Long id;
     private final String name;

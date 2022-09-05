@@ -1,6 +1,7 @@
 package com.example.weblogincore.infrastructure.api.rest.mapper;
 
 import com.example.weblogincore.domain.model.form.*;
+import com.example.weblogincore.domain.model.form.questions.*;
 import com.example.weblogincore.infrastructure.api.rest.model.form.*;
 import com.example.weblogincore.infrastructure.api.rest.model.form.MultipleChoiceQuestionResponse;
 import org.springframework.stereotype.Component;
@@ -23,14 +24,14 @@ public class FormMapper {
         return new SectionResponse(section.getId(),
                                 section.getName(),
                                 section.getDescription(),
-                                toResponseJuja(section.getQuestion()),
+                                toResponse(section.getQuestion()),
                                 section.totalQuestions());
     }
 
     private TextQuestionResponse toResponse(TextQuestion textQuestion) {
         QuestionResponse next = null;
         if(textQuestion.getNextQuestion() != null) {
-            next = toResponseJuja(textQuestion.getNextQuestion());
+            next = toResponse(textQuestion.getNextQuestion());
         }
         return new TextQuestionResponse(textQuestion.getId(),QuestionType.TEXT_TYPE,
                 textQuestion.getTitle(), textQuestion.getDescription(),
@@ -40,11 +41,11 @@ public class FormMapper {
     private BooleanQuestionResponse toResponse(BooleanQuestion booleanQuestion) {
         QuestionResponse nextIfTrue = null;
         if(booleanQuestion.getNextIfTrue() != null) {
-            nextIfTrue = toResponseJuja(booleanQuestion.getNextIfTrue());
+            nextIfTrue = toResponse(booleanQuestion.getNextIfTrue());
         }
         QuestionResponse nextIfFalse = null;
         if(booleanQuestion.getNextIfFalse() != null) {
-            nextIfFalse = toResponseJuja(booleanQuestion.getNextIfFalse());
+            nextIfFalse = toResponse(booleanQuestion.getNextIfFalse());
         }
         return new BooleanQuestionResponse(booleanQuestion.getId(),QuestionType.BOOLEAN_TYPE,
                 booleanQuestion.getTitle(), booleanQuestion.getDescription(),
@@ -57,7 +58,7 @@ public class FormMapper {
                 .collect(Collectors.toList());
         QuestionResponse defaultQuestion = null;
         if(multipleChoiceQuestion.getDefaultQuestion() != null) {
-            defaultQuestion = toResponseJuja(multipleChoiceQuestion.getDefaultQuestion());
+            defaultQuestion = toResponse(multipleChoiceQuestion.getDefaultQuestion());
         }
 
         return new MultipleChoiceQuestionResponse(multipleChoiceQuestion.getId(), QuestionType.MULTIPLE_TYPE,
@@ -68,12 +69,12 @@ public class FormMapper {
     private ChoiceResponse toResponse(Choice choice) {
         QuestionResponse nextQuestion = null;
         if(choice.getNextQuestion() != null) {
-            nextQuestion = toResponseJuja(choice.getNextQuestion());
+            nextQuestion = toResponse(choice.getNextQuestion());
         }
         return new ChoiceResponse(choice.getId(), choice.getName(), nextQuestion);
     }
 
-    private QuestionResponse toResponseJuja(Question question) {
+    public QuestionResponse toResponse(Question question) {
         if (question instanceof TextQuestion) return toResponse((TextQuestion) question);
         if (question instanceof BooleanQuestion) return toResponse((BooleanQuestion) question);
         if (question instanceof MultipleChoiceQuestion) return toResponse((MultipleChoiceQuestion) question);

@@ -29,6 +29,11 @@ class LateralDrawer extends StatelessWidget {
             onTap: () => _onProfile(context),
           ),
           ListTile(
+            leading: const Icon(Icons.question_answer),
+            title: const Text('Responses'),
+            onTap: () => _onResponse(context),
+          ),
+          ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: () => _onLogout(context),
@@ -46,5 +51,8 @@ class LateralDrawer extends StatelessWidget {
   }
   void _onHome(BuildContext context) {
     Navigator.of(context).pushReplacementNamed(RouteGenerator.homePage);
+  }
+  void _onResponse(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed(RouteGenerator.responsesPage);
   }
 }

@@ -1,6 +1,7 @@
 package com.example.weblogincore.infrastructure.persistence.mapper;
 
 import com.example.weblogincore.domain.model.form.*;
+import com.example.weblogincore.domain.model.form.questions.*;
 import com.example.weblogincore.infrastructure.persistence.entities.form.*;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,18 @@ import java.util.stream.Collectors;
 
 @Component
 public class FormEntityMapper {
+
+    public FormEntity toEntityOnlyId(Form form) {
+        FormEntity formEntity = new FormEntity();
+        formEntity.setId(form.getId());
+        return formEntity;
+    }
+
+    public QuestionEntity toEntityOnlyId(Question question) {
+        QuestionEntity questionEntity = new QuestionEntity();
+        questionEntity.setId(questionEntity.getId());
+        return questionEntity;
+    }
 
     public Form toDomain(FormEntity formEntity) {
         List<Section> sections = formEntity.getSections().stream()
@@ -22,7 +35,7 @@ public class FormEntityMapper {
         return new Section(sectionEntity.getId(), sectionEntity.getName(), sectionEntity.getDescription(), question);
     }
 
-    Question toDomain(QuestionEntity questionEntity) {
+    public Question toDomain(QuestionEntity questionEntity) {
         if(questionEntity == null) return null;
 
         switch (questionEntity.getQuestionType()) {
