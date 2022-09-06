@@ -4,6 +4,7 @@ import 'package:web_login_flutter/models/form/choice.dart';
 import 'package:web_login_flutter/models/form/form.dart';
 import 'package:web_login_flutter/models/form/multiple_question.dart';
 import 'package:web_login_flutter/models/form/question.dart';
+import 'package:web_login_flutter/models/form/range_question.dart';
 import 'package:web_login_flutter/models/form/section.dart';
 import 'package:web_login_flutter/models/form/text_question.dart';
 import 'package:web_login_flutter/repositories/form_repository.dart';
@@ -65,6 +66,8 @@ class FormBloc extends Bloc<FormEvent, FormState> {
       return _toBoolQuestion(questionResponse);
     } else if(questionResponse.questionType == "MULTIPLE_TYPE") {
       return _toMultipleQuestion(questionResponse);
+    } else if (questionResponse.questionType == "RANGE_TYPE") {
+      return _toRangeQuestion(questionResponse);
     } else {
       return null;
     }
@@ -81,6 +84,20 @@ class FormBloc extends Bloc<FormEvent, FormState> {
         imageUrl: questionResponse.imageUrl,
         isMandatory: questionResponse.mandatory,
         nextQuestion: nextQuestion);
+  }
+
+  RangeQuestion _toRangeQuestion(QuestionResponse questionResponse) {
+    Question? nextQuestion;
+    if(questionResponse.nextQuestion != null) {
+      nextQuestion = _toQuestion(questionResponse.nextQuestion!);
+    }
+    return RangeQuestion(id: questionResponse.id,
+        title: questionResponse.title,
+        description: questionResponse.description,
+        imageUrl: questionResponse.imageUrl,
+        isMandatory: questionResponse.mandatory,
+        endValue: questionResponse.endValue, startValue: questionResponse.startValue,
+        initValue: questionResponse.initValue, nextQuestion: nextQuestion);
   }
 
   BoolQuestion _toBoolQuestion(QuestionResponse questionResponse) {

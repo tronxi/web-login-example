@@ -5,6 +5,7 @@ import 'package:web_login_flutter/models/form/choice.dart';
 import 'package:web_login_flutter/models/form/form.dart';
 import 'package:web_login_flutter/models/form/multiple_question.dart';
 import 'package:web_login_flutter/models/form/question.dart';
+import 'package:web_login_flutter/models/form/range_question.dart';
 import 'package:web_login_flutter/models/form/section.dart';
 import 'package:web_login_flutter/models/form/text_question.dart';
 import 'package:web_login_flutter/repositories/attempt_repository.dart';
@@ -19,6 +20,16 @@ class AnswerTextQuestion extends FlowFormEvent {
   @override
   String toString() {
     return 'AnswerTextQuestion{response: $response}';
+  }
+}
+
+class AnswerRangeQuestion extends FlowFormEvent {
+  late final double response;
+  AnswerRangeQuestion({required this.response});
+
+  @override
+  String toString() {
+    return 'AnswerRangeQuestion{response: ${response.toString()}}';
   }
 }
 
@@ -122,6 +133,7 @@ class FlowFormBloc extends Bloc<FlowFormEvent, FlowFormState> {
     on<FlowFormPrevious>((event, emit) => emit(_previousQuestion(event)));
     on<AnswerTextQuestion>((event, emit) => emit(_answerTextQuestion(event)));
     on<AnswerBoolQuestion>((event, emit) => emit(_answerBoolQuestion(event)));
+    on<AnswerRangeQuestion>((event, emit) => emit(_answerRangeQuestion(event)));
     on<AnswerMultipleQuestion>(
         (event, emit) => emit(_answerMultipleQuestion(event)));
   }
@@ -177,6 +189,34 @@ class FlowFormBloc extends Bloc<FlowFormEvent, FlowFormState> {
     _attemptRepository.response(_attempt.id, textQuestion.id, answerTextQuestion.response);
     if (textQuestion.hasNextQuestion) {
       _actualQuestion = textQuestion.nextQuestion!;
+    } else {
+      if (_form.isLastSection(_actualSection)) {
+        return WaitingForFinish(attemptId: _attempt.id);
+      }
+
+      _actualSection = _form.nextSectionTo(_actualSection);
+      _actualQuestion = _actualSection.question;
+    }
+    _responses += 1;
+    FormState state = FormState(
+        form: _form,
+        actualSection: _actualSection,
+        actualQuestion: _actualQuestion,
+        responses: _responses);
+    return FlowFormAnswered(state: state);
+  }
+
+  FlowFormState _answerRangeQuestion(AnswerRangeQuestion answerRangeQuestion) {
+    FormState previousState = FormState(
+        form: _form,
+        actualSection: _actualSection,
+        actualQuestion: _actualQuestion,
+        responses: _responses);
+    _historyState.add(previousState);
+    RangeQuestion rangeQuestion = _actualQuestion as RangeQuestion;
+    _attemptRepository.response(_attempt.id, rangeQuestion.id, answerRangeQuestion.response.toString());
+    if (rangeQuestion.hasNextQuestion) {
+      _actualQuestion = rangeQuestion.nextQuestion!;
     } else {
       if (_form.isLastSection(_actualSection)) {
         return WaitingForFinish(attemptId: _attempt.id);

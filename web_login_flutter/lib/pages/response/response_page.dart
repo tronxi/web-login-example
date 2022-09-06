@@ -61,7 +61,6 @@ class FinishedFormWidget extends StatelessWidget {
     List<ListTile> responses = finishedForm.finishedAttempt.responses
             .map((e) => ListTile(title: Text(e.title),subtitle: Text(e.response)))
             .toList();
-    print(finishedForm.finishedAttempt.responses.length);
     return Card(
       child: Column(
         children: [

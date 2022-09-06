@@ -38,6 +38,18 @@ public class FormMapper {
                 textQuestion.getImageUrl(), textQuestion.getMandatory(), next);
     }
 
+    private RangeQuestionResponse toResponse(RangeQuestion rangeQuestion) {
+        QuestionResponse next = null;
+        if(rangeQuestion.getNextQuestion() != null) {
+            next = toResponse(rangeQuestion.getNextQuestion());
+        }
+        return new RangeQuestionResponse(rangeQuestion.getId(),QuestionType.RANGE_TYPE,
+                rangeQuestion.getTitle(), rangeQuestion.getDescription(),
+                rangeQuestion.getImageUrl(), rangeQuestion.getMandatory(),
+                rangeQuestion.getStartValue(), rangeQuestion.getEndValue(), rangeQuestion.getInitValue(),
+                next);
+    }
+
     private BooleanQuestionResponse toResponse(BooleanQuestion booleanQuestion) {
         QuestionResponse nextIfTrue = null;
         if(booleanQuestion.getNextIfTrue() != null) {
@@ -78,7 +90,7 @@ public class FormMapper {
         if (question instanceof TextQuestion) return toResponse((TextQuestion) question);
         if (question instanceof BooleanQuestion) return toResponse((BooleanQuestion) question);
         if (question instanceof MultipleChoiceQuestion) return toResponse((MultipleChoiceQuestion) question);
-
+        if (question instanceof RangeQuestion) return toResponse((RangeQuestion) question);
         return null;
     }
 

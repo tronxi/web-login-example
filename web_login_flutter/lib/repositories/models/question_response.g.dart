@@ -34,6 +34,9 @@ QuestionResponse _$QuestionResponseFromJson(Map<String, dynamic> json) =>
           ? null
           : QuestionResponse.fromJson(
               json['defaultQuestion'] as Map<String, dynamic>),
+      startValue: (json['startValue'] as num?)?.toDouble(),
+      endValue: (json['endValue'] as num?)?.toDouble(),
+      initValue: (json['initValue'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$QuestionResponseToJson(QuestionResponse instance) =>
@@ -44,6 +47,9 @@ Map<String, dynamic> _$QuestionResponseToJson(QuestionResponse instance) =>
       'imageUrl': instance.imageUrl,
       'mandatory': instance.mandatory,
       'questionType': instance.questionType,
+      'startValue': instance.startValue,
+      'endValue': instance.endValue,
+      'initValue': instance.initValue,
       'nextQuestion': instance.nextQuestion?.toJson(),
       'nextQuestionIfTrue': instance.nextQuestionIfTrue?.toJson(),
       'nextQuestionIfFalse': instance.nextQuestionIfFalse?.toJson(),

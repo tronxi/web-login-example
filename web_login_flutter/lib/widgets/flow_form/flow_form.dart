@@ -5,11 +5,13 @@ import 'package:web_login_flutter/models/form/bool_question.dart';
 import 'package:web_login_flutter/models/form/form.dart';
 import 'package:web_login_flutter/models/form/multiple_question.dart';
 import 'package:web_login_flutter/models/form/question.dart';
+import 'package:web_login_flutter/models/form/range_question.dart';
 import 'package:web_login_flutter/models/form/section.dart';
 import 'package:web_login_flutter/models/form/text_question.dart';
 import 'package:web_login_flutter/shared/token_service.dart';
 import 'package:web_login_flutter/widgets/flow_form/bool_question_form.dart';
 import 'package:web_login_flutter/widgets/flow_form/multiple_question_form.dart';
+import 'package:web_login_flutter/widgets/flow_form/range_question_form.dart';
 
 import 'text_question_form.dart';
 
@@ -119,6 +121,9 @@ class FlowFormBody extends StatelessWidget {
                   if (actualQuestion is MultipleQuestion)
                     MultipleQuestionForm(
                         multipleQuestion: actualQuestion as MultipleQuestion),
+                  if (actualQuestion is RangeQuestion)
+                    RangeQuestionForm(
+                        rangeQuestion: actualQuestion as RangeQuestion)
                 ],
               ),
             )

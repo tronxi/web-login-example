@@ -45,6 +45,8 @@ public class FormEntityMapper {
                 return toDomainBoolQuestion((BoolQuestionEntity) questionEntity);
             case "MULTIPLE_TYPE":
                 return toDomainMultipleChoiceQuestion((MultipleChoiceQuestionEntity) questionEntity);
+            case "RANGE_TYPE":
+                return toDomainRangeQuestion((RangeQuestionEntity) questionEntity);
         }
         return null;
     }
@@ -71,6 +73,13 @@ public class FormEntityMapper {
 
         return new MultipleChoiceQuestion(multipleChoiceQuestionEntity.getId(), multipleChoiceQuestionEntity.getTitle(),
                 multipleChoiceQuestionEntity.getDescription(), multipleChoiceQuestionEntity.getImageUrl(), multipleChoiceQuestionEntity.getMandatory(), choices, multipleChoiceQuestionEntity.isAllowMultiple(), defaultQuestion);
+    }
+
+    Question toDomainRangeQuestion(RangeQuestionEntity rangeQuestionEntity) {
+        Question nextQuestion = toDomain(rangeQuestionEntity.getNextQuestion());
+        return new RangeQuestion(rangeQuestionEntity.getId(), rangeQuestionEntity.getTitle(),
+                rangeQuestionEntity.getDescription(), rangeQuestionEntity.getImageUrl(), rangeQuestionEntity.getMandatory(),
+                rangeQuestionEntity.getStartValue(), rangeQuestionEntity.getEndValue(), rangeQuestionEntity.getInitValue(), nextQuestion);
     }
 
     Choice toDomain(ChoiceEntity choiceEntity) {

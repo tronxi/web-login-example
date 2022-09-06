@@ -1,4 +1,6 @@
 SET SQL_SAFE_UPDATES = 0;
+delete from response_entity;
+delete from attempt_entity;
 delete from form_entity_sections;
 delete from form_entity;
 delete from section_entity;
@@ -11,9 +13,12 @@ INSERT INTO `weblogin`.`question_entity` (dtype,id,description,image_url,is_mand
 
 INSERT INTO `weblogin`.`question_entity` (dtype,id,description,image_url,is_mandatory,question_type,title,next_if_false_id,next_if_true_id,next_question_id)
     VALUES ("TextQuestionEntity",0,"pregunta de texto obligatoria",NULL,1,"TEXT_TYPE","pregunta 0",NULL,NULL,1);
+    
+INSERT INTO `weblogin`.`question_entity` (dtype,id,description,image_url,is_mandatory,question_type,title,next_if_false_id,next_if_true_id,next_question_id, start_value, end_value, init_value) 
+    VALUES ("RangeQuestionEntity",11,"pregunta con slider",NULL,0,"RANGE_TYPE","pregunta bonita",NULL,NULL,0, 0, 10, 0);
 
 insert into section_entity (id, description, name, question_id) 
-    values (0, "preguntas de texto obligatorias y no obligatorias", "preguntas de texto", 0);
+    values (0, "preguntas de texto obligatorias y no obligatorias", "preguntas de texto", 11);
 
 --- SECCION 1
 INSERT INTO `weblogin`.`question_entity` (dtype,id,description,image_url,is_mandatory,question_type,title,next_if_false_id,next_if_true_id,next_question_id)

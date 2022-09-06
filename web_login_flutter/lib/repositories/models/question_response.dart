@@ -12,6 +12,9 @@ class QuestionResponse {
   final String? imageUrl;
   final bool mandatory;
   final String questionType;
+  final double? startValue;
+  final double? endValue;
+  final double? initValue;
   final QuestionResponse? nextQuestion;
   final QuestionResponse? nextQuestionIfTrue;
   final QuestionResponse? nextQuestionIfFalse;
@@ -30,7 +33,10 @@ class QuestionResponse {
     required this.nextQuestionIfFalse,
     required this.allowMultiple,
     required this.choices,
-    required this.defaultQuestion});
+    required this.defaultQuestion,
+    required this.startValue,
+    required this.endValue,
+    required this.initValue});
 
   factory QuestionResponse.fromJson(Map<String, dynamic> json) => _$QuestionResponseFromJson(json);
 
@@ -38,6 +44,6 @@ class QuestionResponse {
 
   @override
   String toString() {
-    return 'QuestionResponse{id: $id, title: $title, description: $description, imageUrl: $imageUrl, mandatory: $mandatory, questionType: $questionType, nextQuestion: $nextQuestion, nextQuestionIfTrue: $nextQuestionIfTrue, nextQuestionIfFalse: $nextQuestionIfFalse, allowMultiple: $allowMultiple, choices: $choices}';
+    return 'QuestionResponse{id: $id, title: $title, description: $description, imageUrl: $imageUrl, mandatory: $mandatory, questionType: $questionType, startValue: $startValue, endValue: $endValue, initValue: $initValue, nextQuestion: $nextQuestion, nextQuestionIfTrue: $nextQuestionIfTrue, nextQuestionIfFalse: $nextQuestionIfFalse, defaultQuestion: $defaultQuestion, allowMultiple: $allowMultiple, choices: $choices}';
   }
 }
