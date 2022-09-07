@@ -42,7 +42,6 @@ dependencies:
   jwt_decode: ^0.3.1
   flutter_dotenv: ^5.0.2
   sleek_circular_slider : ^2.0.1
-  vibration: ^1.7.5
 
 dev_dependencies:
   flutter_test:

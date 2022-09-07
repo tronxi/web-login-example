@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import 'package:vibration/vibration.dart';
 import 'package:web_login_flutter/models/form/range_question.dart';
 import 'package:web_login_flutter/widgets/buttons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,11 +46,11 @@ class _RangeQuestionFormState extends State<RangeQuestionForm> {
                 // initialValue: 0,
                 appearance: CircularSliderAppearance(
                     counterClockwise: true,
-                    angleRange: 270,
+                    angleRange: 260,
                     startAngle: 200,
                     customColors: CustomSliderColors(
-                      trackColor: Colors.blue,
-                      progressBarColor: Colors.amberAccent,
+                      trackColor: Colors.grey,
+                      progressBarColor: Colors.blue,
                       shadowStep: 10,
                     ),
                     infoProperties: InfoProperties(
@@ -70,21 +69,9 @@ class _RangeQuestionFormState extends State<RangeQuestionForm> {
     );
   }
   void _onChange(double val) {
-    if(val.roundToDouble() != value) {
-      _vibrate();
-    }
     value = val.roundToDouble();
   }
 
-  void _vibrate() async {
-    if (await Vibration.hasCustomVibrationsSupport() ?? false) {
-      Vibration.vibrate(duration: 500);
-    } else {
-      Vibration.vibrate();
-      await Future.delayed(const Duration(milliseconds: 500));
-      Vibration.vibrate();
-    }
-  }
   void _onPressedSend(BuildContext context) {
     context
         .read<FlowFormBloc>()
